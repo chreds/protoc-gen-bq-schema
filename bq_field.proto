@@ -44,6 +44,9 @@ message BigQueryFieldOptions {
 
   // Optionally add PolicyTag for a field in BigQuery schema.
   string policy_tags = 6;
+
+  // Whether is primary key, doesn't impact table schema but can be looked up later (for example for generating materialized views).
+  bool is_primary = 7;
 }
 
 

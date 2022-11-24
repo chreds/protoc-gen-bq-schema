@@ -16,6 +16,11 @@ go install github.com/chreds/protoc-gen-bq-schema@latest
 
 `protoc` and `protoc-gen-bq-schema` commands must be found in $PATH.
 
+Make sure protoc-gen-go version installed is from google.golang.org/protobuf/cmd/protoc-gen-go@latest 
+(See: https://developers.google.com/protocol-buffers/docs/reference/go-generated)
+
+Do NOT use deprecated github.com/golang/protobuf/protoc-gen-go/plugin
+
 The generated JSON schema files are suffixed with `.schema` and their base names are named
 after their package names and `bq_table_name` options.
 
