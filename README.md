@@ -1,6 +1,6 @@
 # protoc-gen-bq-schema
 
-## Changes from parent
+## Changes from GoogleCloudPlatform/protoc-gen-bq-schema
 
 - Adds support for proto3 optional feature
 - Removes depreciated github.com/golang/protobuf dependencies and replaces with google.golang.org/protobuf
