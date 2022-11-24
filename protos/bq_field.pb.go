@@ -21,7 +21,7 @@
 package protos
 
 import (
-	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	"google.golang.org/protobuf/types/descriptorpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -136,7 +136,7 @@ func (x *BigQueryFieldOptions) GetPolicyTags() string {
 
 var file_bq_field_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
-		ExtendedType:  (*descriptor.FieldOptions)(nil),
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*BigQueryFieldOptions)(nil),
 		Field:         1021,
 		Name:          "gen_bq_schema.bigquery",
@@ -197,7 +197,7 @@ func file_bq_field_proto_rawDescGZIP() []byte {
 var file_bq_field_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_bq_field_proto_goTypes = []interface{}{
 	(*BigQueryFieldOptions)(nil),    // 0: gen_bq_schema.BigQueryFieldOptions
-	(*descriptor.FieldOptions)(nil), // 1: google.protobuf.FieldOptions
+	(*descriptorpb.FieldOptions)(nil), // 1: google.protobuf.FieldOptions
 }
 var file_bq_field_proto_depIdxs = []int32{
 	1, // 0: gen_bq_schema.bigquery:extendee -> google.protobuf.FieldOptions

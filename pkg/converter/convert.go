@@ -10,7 +10,7 @@ import (
 
 	"github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos"
 	"github.com/golang/glog"
-	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
+	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
@@ -302,7 +302,7 @@ func convertMessageType(
 	return
 }
 
-func convertFile(file *descriptor.FileDescriptorProto) ([]*plugin.CodeGeneratorResponse_File, error) {
+func convertFile(file *descriptor.FileDescriptorProto) ([]*pluginpb.CodeGeneratorResponse_File, error) {
 	name := path.Base(file.GetName())
 	pkg, ok := globalPkg.relativelyLookupPackage(file.GetPackage())
 	if !ok {
@@ -310,7 +310,7 @@ func convertFile(file *descriptor.FileDescriptorProto) ([]*plugin.CodeGeneratorR
 	}
 
 	comments := ParseComments(file)
-	response := []*plugin.CodeGeneratorResponse_File{}
+	response := []*pluginpb.CodeGeneratorResponse_File{}
 	for msgIndex, msg := range file.GetMessageType() {
 		path := fmt.Sprintf("%d.%d", messagePath, msgIndex)
 
@@ -340,7 +340,7 @@ func convertFile(file *descriptor.FileDescriptorProto) ([]*plugin.CodeGeneratorR
 			return nil, err
 		}
 
-		resFile := &plugin.CodeGeneratorResponse_File{
+		resFile := &pluginpb.CodeGeneratorResponse_File{
 			Name:    proto.String(fmt.Sprintf("%s/%s.schema", strings.Replace(file.GetPackage(), ".", "/", -1), tableName)),
 			Content: proto.String(string(jsonSchema)),
 		}
@@ -385,13 +385,13 @@ func handleSingleMessageOpt(file *descriptor.FileDescriptorProto, requestParam s
 	})
 }
 
-func Convert(req *plugin.CodeGeneratorRequest) (*plugin.CodeGeneratorResponse, error) {
+func Convert(req *pluginpb.CodeGeneratorRequest) (*pluginpb.CodeGeneratorResponse, error) {
 	generateTargets := make(map[string]bool)
 	for _, file := range req.GetFileToGenerate() {
 		generateTargets[file] = true
 	}
 
-	res := &plugin.CodeGeneratorResponse{}
+	res := &pluginpb.CodeGeneratorResponse{}
 	for _, file := range req.GetProtoFile() {
 		for msgIndex, msg := range file.GetMessageType() {
 			glog.V(1).Infof("Loading a message type %s from package %s", msg.GetName(), file.GetPackage())
@@ -415,14 +415,14 @@ func Convert(req *plugin.CodeGeneratorRequest) (*plugin.CodeGeneratorResponse, e
 
 // ConvertFrom converts input from protoc to a CodeGeneratorRequest and starts conversion
 // Returning a CodeGeneratorResponse containing either an error or the results of converting the given proto
-func ConvertFrom(rd io.Reader) (*plugin.CodeGeneratorResponse, error) {
+func ConvertFrom(rd io.Reader) (*pluginpb.CodeGeneratorResponse, error) {
 	glog.V(1).Info("Reading code generation request")
 	input, err := ioutil.ReadAll(rd)
 	if err != nil {
 		glog.Error("Failed to read request:", err)
 		return nil, err
 	}
-	req := &plugin.CodeGeneratorRequest{}
+	req := &pluginpb.CodeGeneratorRequest{}
 	err = proto.Unmarshal(input, req)
 	if err != nil {
 		glog.Error("Can't unmarshal input:", err)

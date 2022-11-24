@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 const (
@@ -17,7 +17,7 @@ const (
 type Comments map[string]string
 
 // ParseComments reads FileDescriptorProto and parses comments into a map.
-func ParseComments(fd *descriptor.FileDescriptorProto) Comments {
+func ParseComments(fd *descriptorpb.FileDescriptorProto) Comments {
 	comments := make(Comments)
 
 	for _, loc := range fd.GetSourceCodeInfo().GetLocation() {
@@ -46,7 +46,7 @@ func (c Comments) Get(path string) string {
 	return ""
 }
 
-func hasComment(loc *descriptor.SourceCodeInfo_Location) bool {
+func hasComment(loc *descriptorpb.SourceCodeInfo_Location) bool {
 	if loc.GetLeadingComments() == "" && loc.GetTrailingComments() == "" {
 		return false
 	}
@@ -54,7 +54,7 @@ func hasComment(loc *descriptor.SourceCodeInfo_Location) bool {
 	return true
 }
 
-func buildComment(loc *descriptor.SourceCodeInfo_Location) string {
+func buildComment(loc *descriptorpb.SourceCodeInfo_Location) string {
 	comment := strings.TrimSpace(loc.GetLeadingComments()) + "\n\n" + strings.TrimSpace(loc.GetTrailingComments())
 	return strings.Trim(comment, "\n")
 }

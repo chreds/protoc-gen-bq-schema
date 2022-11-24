@@ -28,10 +28,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
-
 	"github.com/GoogleCloudPlatform/protoc-gen-bq-schema/pkg/converter"
 	"github.com/golang/glog"
-	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
+	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -44,7 +43,7 @@ func main() {
 		ok = false
 		if res == nil {
 			message := fmt.Sprintf("Failed to read input: %v", err)
-			res = &plugin.CodeGeneratorResponse{
+			res = &pluginpb.CodeGeneratorResponse{
 				Error: &message,
 			}
 		}

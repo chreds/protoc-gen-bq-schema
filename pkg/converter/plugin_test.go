@@ -19,7 +19,7 @@ import (
 	"reflect"
 	"testing"
 
-	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
+	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/encoding/prototext"
 )
 
@@ -35,8 +35,8 @@ func joinNames(targets map[string]*schema) (result string) {
 	return
 }
 
-func testConvert(t *testing.T, input string, expectedOutputs map[string]string, extras ...func(request *plugin.CodeGeneratorRequest)) {
-	req := plugin.CodeGeneratorRequest{}
+func testConvert(t *testing.T, input string, expectedOutputs map[string]string, extras ...func(request *pluginpb.CodeGeneratorRequest)) {
+	req := pluginpb.CodeGeneratorRequest{}
 	if err := prototext.Unmarshal([]byte(input), &req); err != nil {
 		t.Fatal("Failed to parse test input: ", err)
 	}
