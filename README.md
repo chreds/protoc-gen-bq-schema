@@ -1,5 +1,12 @@
 # protoc-gen-bq-schema
 
+## Changes from parent
+
+- Adds support for proto3 optional feature
+- Removes depreciated github.com/golang/protobuf dependencies and replaces with google.golang.org/protobuf
+- Adds is_primary flag for fields, this doesn't change the schema but it does allow for querying the field later for that flag to help generate materialized view GROUP BY table schema
+
+## Description
 
 protoc-gen-bq-schema is a plugin for [ProtocolBuffer compiler](https://github.com/google/protobuf).
 It converts messages written in .proto format into schema files in JSON for BigQuery.
@@ -15,11 +22,6 @@ go install github.com/chreds/protoc-gen-bq-schema@latest
  protoc --bq-schema\_out=path/to/outdir \[--bq-schema_opt=single-message\] foo.proto
 
 `protoc` and `protoc-gen-bq-schema` commands must be found in $PATH.
-
-Make sure protoc-gen-go version installed is from google.golang.org/protobuf/cmd/protoc-gen-go@latest 
-(See: https://developers.google.com/protocol-buffers/docs/reference/go-generated)
-
-Do NOT use deprecated github.com/golang/protobuf/protoc-gen-go/plugin
 
 The generated JSON schema files are suffixed with `.schema` and their base names are named
 after their package names and `bq_table_name` options.
