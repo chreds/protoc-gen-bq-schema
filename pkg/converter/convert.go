@@ -8,7 +8,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/chreds/protoc-gen-bq-schema/protos"
+	protos "github.com/chreds/protoc-gen-bq-schema/protos"
 	"github.com/golang/glog"
 	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/encoding/prototext"
@@ -392,6 +392,11 @@ func Convert(req *pluginpb.CodeGeneratorRequest) (*pluginpb.CodeGeneratorRespons
 	}
 
 	res := &pluginpb.CodeGeneratorResponse{}
+	flags := res.GetSupportedFeatures()
+	flags |= uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL)
+
+	res.SupportedFeatures = &flags
+
 	for _, file := range req.GetProtoFile() {
 		for msgIndex, msg := range file.GetMessageType() {
 			glog.V(1).Infof("Loading a message type %s from package %s", msg.GetName(), file.GetPackage())
