@@ -8,7 +8,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/GoogleCloudPlatform/protoc-gen-bq-schema/protos"
+	"github.com/chreds/protoc-gen-bq-schema/protos"
 	"github.com/golang/glog"
 	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/encoding/prototext"
