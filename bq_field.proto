@@ -52,7 +52,7 @@ message BigQueryFieldOptions {
   bool materialize_first_seen = 21;
 
   // Whether to ignore nulls for a field when generating the materialized view (ignore null values, provide latest non null value)
-  bool materialize_not_nulls = 22;
+  bool materialize_ignore_nulls = 22;
 
 }
 
