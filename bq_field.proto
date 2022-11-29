@@ -46,7 +46,14 @@ message BigQueryFieldOptions {
   string policy_tags = 6;
 
   // Whether is primary key, doesn't impact table schema but can be looked up later (for example for generating materialized views).
-  bool is_primary = 7;
+  bool is_primary = 20;
+
+  // Whether to create first_seen in materialized view for a timestamp type field
+  bool materialize_first_seen = 21;
+
+  // Whether to ignore nulls for a field when generating the materialized view (ignore null values, provide latest non null value)
+  bool materialize_not_nulls = 22;
+
 }
 
 

@@ -60,6 +60,8 @@ var (
 		descriptor.FieldDescriptorProto_LABEL_REQUIRED: "REQUIRED",
 		descriptor.FieldDescriptorProto_LABEL_REPEATED: "REPEATED",
 	}
+
+	SupportedFeatures = uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL)
 )
 
 // Field describes the schema of a field in BigQuery.
@@ -392,10 +394,8 @@ func Convert(req *pluginpb.CodeGeneratorRequest) (*pluginpb.CodeGeneratorRespons
 	}
 
 	res := &pluginpb.CodeGeneratorResponse{}
-	flags := res.GetSupportedFeatures()
-	flags |= uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL)
 
-	res.SupportedFeatures = &flags
+	res.SupportedFeatures = &SupportedFeatures
 
 	for _, file := range req.GetProtoFile() {
 		for msgIndex, msg := range file.GetMessageType() {
