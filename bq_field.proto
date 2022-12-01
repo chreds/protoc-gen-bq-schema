@@ -54,6 +54,8 @@ message BigQueryFieldOptions {
   // Whether to ignore nulls for a field when generating the materialized view (ignore null values, provide latest non null value)
   bool materialize_ignore_nulls = 22;
 
+  // Create additional tables materializing this field as GROUP BY and exposing latest record for that group
+  bool materialize = 23;
 }
 
 
