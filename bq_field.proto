@@ -59,6 +59,9 @@ message BigQueryFieldOptions {
 
   // What time period to partition this table by (can only be used on one field, options are "HOUR", "DAY", "MONTH", "YEAR")
   string time_partition_type = 24;
+
+  // Whether to add partition to this table by this value
+  bool partition_by_value= 25;
 }
 
 
