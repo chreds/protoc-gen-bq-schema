@@ -5,6 +5,7 @@
 - Adds support for proto3 optional feature
 - Removes depreciated github.com/golang/protobuf dependencies and replaces with google.golang.org/protobuf
 - Adds is_primary flag for fields, this doesn't change the schema but it does allow for querying the field later for that flag to help generate materialized view GROUP BY table schema
+- Adds partition options on fields to allow for creating those tables with specific partitions
 
 ## Description
 
