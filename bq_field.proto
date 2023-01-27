@@ -56,6 +56,9 @@ message BigQueryFieldOptions {
 
   // Create additional tables materializing this field as GROUP BY and exposing latest record for that group
   bool materialize = 23;
+
+  // What time period to partition this table by (can only be used on one field, options are "HOUR", "DAY", "MONTH", "YEAR")
+  string time_partition_type = 24;
 }
 
 
