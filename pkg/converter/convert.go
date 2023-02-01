@@ -10,10 +10,10 @@ import (
 
 	"github.com/chreds/protoc-gen-bq-schema/protos"
 	"github.com/golang/glog"
-	"google.golang.org/protobuf/types/pluginpb"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 	descriptor "google.golang.org/protobuf/types/descriptorpb"
+	"google.golang.org/protobuf/types/pluginpb"
 )
 
 var (
@@ -29,6 +29,7 @@ var (
 		".google.protobuf.BytesValue":  "BYTES",
 		".google.protobuf.Duration":    "STRING",
 		".google.protobuf.Timestamp":   "TIMESTAMP",
+		".google.type.Date":            "DATE",
 	}
 	typeFromFieldType = map[descriptor.FieldDescriptorProto_Type]string{
 		descriptor.FieldDescriptorProto_TYPE_DOUBLE: "FLOAT",
