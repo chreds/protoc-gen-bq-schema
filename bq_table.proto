@@ -56,4 +56,10 @@ message BigQueryMessageOptions {
   // or "<field name>:RECORD:<protobuf type>" for message types.
   // "NULLABLE" by default, different mode may be set via optional suffix ":<mode>"
   repeated string extra_fields = 3;
+
+  // If set, execute specified sql file to create schema, use for extra views or materialized tables
+  repeated string sql = 10;
+
+  // If set, skip using the schema to create this table (use with sql option)
+  bool skip_schema = 11;
 }

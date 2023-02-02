@@ -29,7 +29,6 @@ var (
 		".google.protobuf.BytesValue":  "BYTES",
 		".google.protobuf.Duration":    "STRING",
 		".google.protobuf.Timestamp":   "TIMESTAMP",
-		".google.type.Date":            "DATE",
 	}
 	typeFromFieldType = map[descriptor.FieldDescriptorProto_Type]string{
 		descriptor.FieldDescriptorProto_TYPE_DOUBLE: "FLOAT",
